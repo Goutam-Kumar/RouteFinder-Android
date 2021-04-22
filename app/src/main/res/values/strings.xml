@@ -2,4 +2,18 @@
     <string name="app_name">RouteFinder</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="regular_font">Montserrat-Regular.ttf</string>
+    <string name="bold_font">Montserrat-SemiBold.ttf</string>
+    <string name="semi_bold">Montserrat-Medium.ttf</string>
+    
+    <string name="source">Source</string>
+    <string name="destination">Destination</string>
+    <string name="fastest_route">fastest route</string>
+    <string name="report">Report</string>
+    <string name="next_schedule">NEXT SCHEDULED</string>
+    <string name="estimated_price">ESTIMATED PRICE</string>
+    <string name="inr">₹</string>
+    <string name="travel_time">Travel Time</string>
+    <string name="distance">Distance</string>
 </resources>

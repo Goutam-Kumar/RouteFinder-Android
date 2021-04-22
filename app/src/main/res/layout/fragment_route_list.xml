@@ -1,14 +1,193 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.routelist.RouteListFragment">
+    tools:context=".ui.routelist.RouteListFragment"
+    android:background="@color/screen_bg">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dim_10_dp"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="@dimen/dim_3_dp"
+        app:cardElevation="@dimen/dim_10_dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <!--Source Picker-->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/source_picker"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="@dimen/dim_10_dp"
+                android:paddingEnd="@dimen/dim_10_dp">
+
+                <ImageView
+                    android:id="@+id/dot"
+                    android:layout_width="@dimen/dim_5_dp"
+                    android:layout_height="@dimen/dim_5_dp"
+                    android:src="@drawable/orange_dot"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    tools:ignore="ContentDescription" />
+
+                <com.goutam.routefinder.customview.ThemeTextView
+                    android:id="@+id/source_picker_type"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/source"
+                    android:textColor="@color/gray_text"
+                    android:textSize="@dimen/text_size_sm"
+                    android:padding="@dimen/dim_5_dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/dot"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:tv_fontName="@string/regular_font"/>
+
+                <com.goutam.routefinder.customview.ThemeTextView
+                    android:id="@+id/source_name"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="HRBR Layout, 1st Block, Kalyan Nagar, Bangalore, Karnataka"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_l"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:paddingStart="@dimen/dim_5_dp"
+                    android:paddingEnd="@dimen/dim_5_dp"
+                    android:paddingBottom="@dimen/dim_10_dp"
+                    app:layout_constraintTop_toBottomOf="@+id/source_picker_type"
+                    app:layout_constraintStart_toStartOf="@+id/source_picker_type"
+                    app:layout_constraintEnd_toStartOf="@+id/source_fav"
+                    app:tv_fontName="@string/semi_bold"/>
+
+
+                <ImageView
+                    android:id="@+id/source_fav"
+                    android:layout_width="@dimen/dim_20_dp"
+                    android:layout_height="@dimen/dim_20_dp"
+                    android:src="@drawable/ic_love"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/screen_bg"/>
+
+            <!--Destination Picker-->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/destination_picker"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="@dimen/dim_10_dp"
+                android:paddingEnd="@dimen/dim_10_dp">
+
+                <ImageView
+                    android:id="@+id/dest_dot"
+                    android:layout_width="@dimen/dim_5_dp"
+                    android:layout_height="@dimen/dim_5_dp"
+                    android:src="@drawable/black_dot"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    tools:ignore="ContentDescription" />
+
+                <com.goutam.routefinder.customview.ThemeTextView
+                    android:id="@+id/dest_picker_type"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/destination"
+                    android:textColor="@color/gray_text"
+                    android:textSize="@dimen/text_size_sm"
+                    android:padding="@dimen/dim_5_dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/dest_dot"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:tv_fontName="@string/regular_font"/>
+
+                <com.goutam.routefinder.customview.ThemeTextView
+                    android:id="@+id/dest_name"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Cafe Coffee Day - Barton Centre, M G Road, Bangalore, Karnataka"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_l"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:paddingStart="@dimen/dim_5_dp"
+                    android:paddingEnd="@dimen/dim_5_dp"
+                    android:paddingBottom="@dimen/dim_10_dp"
+                    app:layout_constraintTop_toBottomOf="@+id/dest_picker_type"
+                    app:layout_constraintStart_toStartOf="@+id/dest_picker_type"
+                    app:layout_constraintEnd_toStartOf="@+id/dest_fav"
+                    app:tv_fontName="@string/semi_bold"/>
+
+
+                <ImageView
+                    android:id="@+id/dest_fav"
+                    android:layout_width="@dimen/dim_20_dp"
+                    android:layout_height="@dimen/dim_20_dp"
+                    android:src="@drawable/ic_love"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+
+    <LinearLayout
+        android:id="@+id/list_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:gravity="bottom"
+        android:padding="@dimen/dim_20_dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
-</FrameLayout>
+        <com.goutam.routefinder.customview.ThemeTextView
+            android:id="@+id/fastest_route"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/fastest_route"
+            android:textAllCaps="true"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_l"
+            android:layout_marginBottom="@dimen/dim_5_dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/dest_dot"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tv_fontName="@string/bold_font"/>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="@dimen/dim_5_dp">
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rcv_route_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:listitem="@layout/item_route_list"/>
+        </androidx.cardview.widget.CardView>
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

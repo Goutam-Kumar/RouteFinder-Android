@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:weightSum="4">
+
+    <LinearLayout
+        android:id="@+id/next_schedule_layout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <com.goutam.routefinder.customview.ThemeTextView
+            android:id="@+id/next_schedule_hd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/next_schedule"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_sm"
+            app:tv_fontName="@string/semi_bold" />
+
+        <com.goutam.routefinder.customview.ThemeTextView
+            android:id="@+id/next_schedule"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="12:42 PM"
+            android:textColor="@color/text_yellow"
+            android:textSize="@dimen/text_size_sm"
+            app:tv_fontName="@string/semi_bold" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/est_price_layout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:paddingStart="@dimen/dim_10_dp">
+
+        <com.goutam.routefinder.customview.ThemeTextView
+            android:id="@+id/est_price_hd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/estimated_price"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_sm"
+            app:tv_fontName="@string/semi_bold" />
+
+        <com.goutam.routefinder.customview.ThemeTextView
+            android:id="@+id/est_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="₹ 5"
+            android:textColor="@color/text_yellow"
+            android:textSize="@dimen/text_size_sm"
+            app:tv_fontName="@string/semi_bold" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/travel_time_layout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:paddingStart="@dimen/dim_10_dp">
+
+        <com.goutam.routefinder.customview.ThemeTextView
+            android:id="@+id/travel_time_hd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/travel_time"
+            android:textAllCaps="true"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_sm"
+            app:tv_fontName="@string/semi_bold" />
+
+        <com.goutam.routefinder.customview.ThemeTextView
+            android:id="@+id/travel_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="32 mins"
+            android:textColor="@color/text_yellow"
+            android:textSize="@dimen/text_size_sm"
+            app:tv_fontName="@string/semi_bold" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/distance_layout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:paddingStart="@dimen/dim_10_dp">
+
+        <com.goutam.routefinder.customview.ThemeTextView
+            android:id="@+id/distance_hd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/distance"
+            android:textAllCaps="true"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_sm"
+            app:tv_fontName="@string/semi_bold" />
+
+        <com.goutam.routefinder.customview.ThemeTextView
+            android:id="@+id/distance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="32 mins"
+            android:textColor="@color/text_yellow"
+            android:textSize="@dimen/text_size_sm"
+            app:tv_fontName="@string/semi_bold" />
+    </LinearLayout>
+
+</LinearLayout>
