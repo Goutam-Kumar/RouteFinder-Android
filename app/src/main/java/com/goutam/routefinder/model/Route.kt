@@ -1,5 +1,9 @@
 package com.goutam.routefinder.model
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
+@Parcelize
 data class Route(
     val busRouteDetails: BusRouteDetails? = null,
     val destinationLat: Double = 0.0,
@@ -17,4 +21,4 @@ data class Route(
     val sourceTime: List<String>? = null,
     val sourceTitle: String? = null,
     val trails: List<Trails>? = null
-)
+): Parcelable

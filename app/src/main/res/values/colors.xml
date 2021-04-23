@@ -9,7 +9,10 @@
     <color name="white">#FFFFFFFF</color>
 
     <color name="screen_bg">#f5f7f9</color>
-    <color name="gray_text">#B5B5B5</color>
+    <color name="gray_text">#9E9E9E</color>
     <color name="orange">#ff7a00</color>
-    <color name="text_yellow">#ccb184</color>
+    <color name="text_yellow">#D6782E</color>
+    <color name="train">#D84274</color>
+    <color name="bus">#F8E746</color>
+    <color name="walk">#263f45</color>
 </resources>

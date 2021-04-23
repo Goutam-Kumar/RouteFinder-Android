@@ -4,25 +4,22 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.goutam.routefinder.roomhelper.dao.BusRouteDao
-import com.goutam.routefinder.roomhelper.dao.LegDao
+import androidx.room.TypeConverters
 import com.goutam.routefinder.roomhelper.dao.RouteDao
-import com.goutam.routefinder.roomhelper.dao.TrailDao
-import com.goutam.routefinder.roomhelper.tables.TabBusRoute
-import com.goutam.routefinder.roomhelper.tables.TabLeg
-import com.goutam.routefinder.roomhelper.tables.TabRoute
-import com.goutam.routefinder.roomhelper.tables.TabTrails
+import com.goutam.routefinder.roomhelper.tables.Converters
+import com.goutam.routefinder.roomhelper.tables.TabRouteDetails
 
 @Database(
-    entities = [TabRoute::class, TabLeg::class, TabTrails::class, TabBusRoute:: class],
+    entities = [TabRouteDetails::class],
     version = 1,
     exportSchema = false
 )
+@TypeConverters(Converters::class)
 abstract class RouteFinderDatabase: RoomDatabase() {
     abstract fun routeDao(): RouteDao
-    abstract fun legDao(): LegDao
+    /*abstract fun legDao(): LegDao
     abstract fun trailDao(): TrailDao
-    abstract fun busRouteDao(): BusRouteDao
+    abstract fun busRouteDao(): BusRouteDao*/
 
     companion object {
         @Volatile private var instance: RouteFinderDatabase? = null

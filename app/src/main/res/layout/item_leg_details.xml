@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/img_leg_icon"
+        android:layout_width="@dimen/dim_18_dp"
+        android:layout_height="@dimen/dim_18_dp"
+        app:srcCompat="@drawable/ic_walk"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ContentDescription" />
+
+    <com.goutam.routefinder.customview.ThemeTextView
+        android:id="@+id/txt_leg_details"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/report"
+        android:textSize="@dimen/text_size_sm"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toEndOf="@+id/img_leg_icon"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tv_fontName="@string/regular_font"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

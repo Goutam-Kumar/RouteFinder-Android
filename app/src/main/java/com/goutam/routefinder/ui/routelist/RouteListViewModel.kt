@@ -1,31 +1,24 @@
 package com.goutam.routefinder.ui.routelist
 
 import android.util.Log
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.goutam.routefinder.model.BusRouteDetails
 import com.goutam.routefinder.model.ModelRouteData
-import com.goutam.routefinder.model.Route
-import com.goutam.routefinder.model.Trails
-import com.goutam.routefinder.roomhelper.dao.BusRouteDao
-import com.goutam.routefinder.roomhelper.dao.LegDao
 import com.goutam.routefinder.roomhelper.dao.RouteDao
-import com.goutam.routefinder.roomhelper.dao.TrailDao
 import com.goutam.routefinder.roomhelper.repository.Result
 import com.goutam.routefinder.roomhelper.repository.RouteRepository
-import com.goutam.routefinder.roomhelper.tables.TabBusRoute
-import com.goutam.routefinder.roomhelper.tables.TabLeg
-import com.goutam.routefinder.roomhelper.tables.TabRoute
-import com.goutam.routefinder.roomhelper.tables.TabTrails
+import com.goutam.routefinder.roomhelper.tables.TabRouteDetails
 import kotlinx.coroutines.launch
 
 class RouteListViewModel(
-     routeDao: RouteDao,
-     legDao: LegDao,
-     trailDao: TrailDao,
-     busRouteDao: BusRouteDao
+        routeDao: RouteDao
 ): ViewModel() {
-    private val routeRepo = RouteRepository(routeDao, legDao, trailDao, busRouteDao)
+    private val routeRepo = RouteRepository(routeDao)
+
+    private val _allRouteList = MutableLiveData<List<TabRouteDetails>>()
+    val allRouteList: LiveData<List<TabRouteDetails>> = _allRouteList
 
     fun processRouteResponse(routeJsonResponse: List<ModelRouteData>) {
         routeJsonResponse.forEach {
@@ -34,85 +27,25 @@ class RouteListViewModel(
     }
 
     private fun insertRoute(data: ModelRouteData) {
-        val tabRoute = TabRoute(
-            routeTitle = data.routeTitle,
-            totalDistance = data.totalDistance,
-            totalDuration = data.totalDuration,
-            totalFare = data.totalFare
+        val tabRoute = TabRouteDetails(
+                routeTitle = data.routeTitle,
+                totalDistance = data.totalDistance,
+                totalDuration = data.totalDuration,
+                totalFare = data.totalFare,
+                routes = data.routes
         )
         viewModelScope.launch {
-            when(val insertResponse = routeRepo.insertRoute(tabRoute)){
-                is Result.Success -> insertLeg(data, insertResponse.rowId)
+            when(routeRepo.insertRoute(tabRoute)){
+                is Result.Success -> invokeAllRoute()
                 is Result.Failure -> Log.d("Route Operation: ", "Route not inserted!")
             }
         }
     }
 
-    private suspend fun insertLeg(data: ModelRouteData, routeId: Long) {
-        data.routes?.forEach {
-            val tabLeg = it.transformToTabLeg(routeId)
-            when(val insertLegResponse = routeRepo.insertLeg(tabLeg)){
-                is Result.Success -> {
-                    insertTrails(it, insertLegResponse.rowId)
-                    insertBusRoute(it, insertLegResponse.rowId)
-                }
-                is Result.Failure -> Log.d("Leg Operation: ", "Leg not inserted!")
-            }
-        }
-    }
-
-    private fun insertBusRoute(routeData: Route, legId: Long) {
+    fun invokeAllRoute(){
         viewModelScope.launch {
-            routeData.busRouteDetails?.let {
-                val tabBusRoute = it.transformToTabBusRoute(legId)
-                routeRepo.insertBusRoute(tabBusRoute)
-            }
+            _allRouteList.value = routeRepo.getAllRoutes()
         }
     }
-
-    private fun insertTrails(routeData: Route, legId: Long) {
-        viewModelScope.launch {
-            routeData.trails?.forEach {
-                val tabTrails = it.transformToTabTrail(legId)
-                routeRepo.insertTrail(tabTrails)
-            }
-        }
-    }
-
-    private fun Route.transformToTabLeg(routeId: Long) = TabLeg(
-        destinationLat = destinationLat,
-        destinationLong = destinationLong,
-        destinationTime = destinationTime?.first(),
-        destinationTitle = destinationTitle,
-        distance = distance,
-        duration = duration,
-        fare = fare,
-        medium = medium,
-        rideEstimation = rideEstimation,
-        routeName = routeName,
-        sourceLat = sourceLat,
-        sourceLong = sourceLong,
-        sourceTime = sourceTime?.first(),
-        sourceTitle = sourceTitle,
-        routeId = routeId
-    )
-
-    private fun Trails.transformToTabTrail(legId: Long) = TabTrails(
-        distance = distance,
-        name = name,
-        fareStage = fareStage,
-        latitude = latitude,
-        longitude = longitude,
-        seq = seq,
-        time = time,
-        legId = legId
-    )
-
-    private fun BusRouteDetails.transformToTabBusRoute(legId: Long) = TabBusRoute(
-        routeName = routeName,
-        routeDescription = routeDescription,
-        routeNumber = routeNumber,
-        legId = legId
-    )
 
 }

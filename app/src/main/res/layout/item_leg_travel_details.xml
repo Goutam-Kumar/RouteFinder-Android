@@ -18,17 +18,19 @@
             android:layout_height="wrap_content"
             android:text="@string/next_schedule"
             android:textColor="@color/black"
-            android:textSize="@dimen/text_size_sm"
+            android:textSize="@dimen/text_size_xx_sm"
+            android:singleLine="true"
+            android:ellipsize="marquee"
             app:tv_fontName="@string/semi_bold" />
 
         <com.goutam.routefinder.customview.ThemeTextView
             android:id="@+id/next_schedule"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="12:42 PM"
             android:textColor="@color/text_yellow"
             android:textSize="@dimen/text_size_sm"
-            app:tv_fontName="@string/semi_bold" />
+            android:text="~08:59 AM"
+            app:tv_fontName="@string/bold_font" />
     </LinearLayout>
 
     <LinearLayout
@@ -45,17 +47,18 @@
             android:layout_height="wrap_content"
             android:text="@string/estimated_price"
             android:textColor="@color/black"
-            android:textSize="@dimen/text_size_sm"
+            android:textSize="@dimen/text_size_xx_sm"
+            android:singleLine="true"
+            android:ellipsize="marquee"
             app:tv_fontName="@string/semi_bold" />
 
         <com.goutam.routefinder.customview.ThemeTextView
             android:id="@+id/est_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="₹ 5"
             android:textColor="@color/text_yellow"
             android:textSize="@dimen/text_size_sm"
-            app:tv_fontName="@string/semi_bold" />
+            app:tv_fontName="@string/bold_font" />
     </LinearLayout>
 
     <LinearLayout
@@ -73,17 +76,18 @@
             android:text="@string/travel_time"
             android:textAllCaps="true"
             android:textColor="@color/black"
-            android:textSize="@dimen/text_size_sm"
+            android:textSize="@dimen/text_size_xx_sm"
+            android:singleLine="true"
+            android:ellipsize="marquee"
             app:tv_fontName="@string/semi_bold" />
 
         <com.goutam.routefinder.customview.ThemeTextView
             android:id="@+id/travel_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="32 mins"
             android:textColor="@color/text_yellow"
             android:textSize="@dimen/text_size_sm"
-            app:tv_fontName="@string/semi_bold" />
+            app:tv_fontName="@string/bold_font" />
     </LinearLayout>
 
     <LinearLayout
@@ -101,17 +105,18 @@
             android:text="@string/distance"
             android:textAllCaps="true"
             android:textColor="@color/black"
-            android:textSize="@dimen/text_size_sm"
+            android:textSize="@dimen/text_size_xx_sm"
+            android:singleLine="true"
+            android:ellipsize="marquee"
             app:tv_fontName="@string/semi_bold" />
 
         <com.goutam.routefinder.customview.ThemeTextView
             android:id="@+id/distance"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="32 mins"
             android:textColor="@color/text_yellow"
             android:textSize="@dimen/text_size_sm"
-            app:tv_fontName="@string/semi_bold" />
+            app:tv_fontName="@string/bold_font" />
     </LinearLayout>
 
 </LinearLayout>

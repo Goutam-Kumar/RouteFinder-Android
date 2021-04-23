@@ -23,5 +23,17 @@ class Utils {
                 }
             }
         }
+
+        fun getTimeInMin(time: String?): Double {
+            time?.let { val units = time.split(":".toRegex()).toTypedArray()
+                val hours = units[0].toInt()
+                val minutes = units[1].toInt()
+                val seconds = units[2].toInt()
+                val totalSec =  3600 * hours + 60 * minutes + seconds
+                return totalSec.toDouble() / 60
+            }
+            return 0.0
+        }
+
     }
 }
