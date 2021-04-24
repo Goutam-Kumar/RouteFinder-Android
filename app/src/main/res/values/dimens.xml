@@ -11,6 +11,7 @@
     <dimen name="text_size_l">18sp</dimen>
     <dimen name="dim_8_dp">8dp</dimen>
     <dimen name="dim_30_dp">30dp</dimen>
+    <dimen name="dim_40_dp">40dp</dimen>
     <dimen name="dim_15_dp">15dp</dimen>
     <dimen name="dim_18_dp">18dp</dimen>
 </resources>

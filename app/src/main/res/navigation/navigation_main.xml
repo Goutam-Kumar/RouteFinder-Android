@@ -9,5 +9,18 @@
         android:id="@+id/routeListFragment"
         android:name="com.goutam.routefinder.ui.routelist.RouteListFragment"
         android:label="fragment_route_list"
-        tools:layout="@layout/fragment_route_list" />
+        tools:layout="@layout/fragment_route_list" >
+        <action
+            android:id="@+id/action_routeListFragment_to_routeDetailsFragment"
+            app:destination="@id/routeDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/routeDetailsFragment"
+        android:name="com.goutam.routefinder.ui.routedetails.RouteDetailsFragment"
+        android:label="fragment_route_details"
+        tools:layout="@layout/fragment_route_details" >
+        <argument
+            android:name="routeDetails"
+            app:argType="com.goutam.routefinder.roomhelper.tables.TabRouteDetails" />
+    </fragment>
 </navigation>

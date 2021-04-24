@@ -15,5 +15,5 @@ interface RouteDao {
     fun insertRoute( route: TabRouteDetails): Long
 
     @Query("DELETE FROM tab_route")
-    fun deleteAllRoute()
+    fun deleteAllRoute(): Int
 }

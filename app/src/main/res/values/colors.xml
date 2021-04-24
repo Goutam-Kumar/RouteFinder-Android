@@ -15,4 +15,9 @@
     <color name="train">#D84274</color>
     <color name="bus">#F8E746</color>
     <color name="walk">#263f45</color>
+    <color name="dark_gray">#575757</color>
+    <color name="bus_line">#02bdfc</color>
+    <color name="walk_line">#ef11f0</color>
+    <color name="train_line">#FF6D00</color>
+    <color name="navy_blue">#28307f</color>
 </resources>

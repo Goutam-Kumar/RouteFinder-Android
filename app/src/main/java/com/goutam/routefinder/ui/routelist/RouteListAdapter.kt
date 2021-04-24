@@ -19,7 +19,8 @@ import com.goutam.routefinder.roomhelper.tables.TabRouteDetails
 import com.goutam.routefinder.utils.Utils
 
 class RouteListAdapter(
-        private val routeList: MutableList<TabRouteDetails> = mutableListOf()
+        private val routeList: MutableList<TabRouteDetails> = mutableListOf(),
+        private val onItemClicked: (routeDetails: TabRouteDetails) -> Unit
 ): RecyclerView.Adapter<RouteListAdapter.RouteHolder>() {
     lateinit var mContext: Context
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RouteHolder {
@@ -42,14 +43,14 @@ class RouteListAdapter(
         notifyDataSetChanged()
     }
 
-    class RouteHolder(private val itemRouteListBinding: ItemRouteListBinding): RecyclerView.ViewHolder(itemRouteListBinding.root) {
+    inner class RouteHolder(private val itemRouteListBinding: ItemRouteListBinding): RecyclerView.ViewHolder(itemRouteListBinding.root) {
         fun bind(routeDetails: TabRouteDetails) {
             itemRouteListBinding.apply {
                 val res: Resources? = itemRouteListBinding.root.resources
                 tripDetails.travelTime.text = res?.getString(R.string.minute_duration, Utils.getTimeInMin(routeDetails.totalDuration).toInt().toString())
                 tripDetails.distance.text = res?.getString(R.string.kms_distance, String.format("%.2f", routeDetails.totalDistance))
                 tripDetails.estPrice.text = res?.getString(R.string.total_fare, routeDetails.totalFare.toString())
-
+                cardContainer.setOnClickListener { onItemClicked(routeDetails) }
                 initProgressData(progress,legIconHolder,legDetailsHolder, routeDetails.routes, routeDetails.totalDuration)
             }
         }
@@ -100,7 +101,6 @@ class RouteListAdapter(
                 initData(progressItemList)
                 invalidate()
             }
-
         }
 
         private fun processLegDetailsDisplayData(legIcon: ImageView?, txtLeg: ThemeTextView?, route: Route) {
