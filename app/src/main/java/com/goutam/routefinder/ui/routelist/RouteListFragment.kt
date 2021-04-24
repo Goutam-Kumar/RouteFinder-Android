@@ -21,9 +21,10 @@ import com.google.android.libraries.places.widget.AutocompleteActivity
 import com.google.android.libraries.places.widget.model.AutocompleteActivityMode
 import com.goutam.routefinder.R
 import com.goutam.routefinder.databinding.FragmentRouteListBinding
+import com.goutam.routefinder.di.daggercomponent.DaggerAppComponent
 import com.goutam.routefinder.model.ModelRouteData
-import com.goutam.routefinder.roomhelper.RouteFinderDatabase
 import com.goutam.routefinder.utils.Utils
+import javax.inject.Inject
 
 private const val AUTO_COMPLETE_REQ_CODE: Int = 2000
 
@@ -34,11 +35,11 @@ class RouteListFragment : Fragment() {
     private lateinit var recyclerAdapter: RouteListAdapter
     private lateinit var placesClient: PlacesClient
     private lateinit var currentClickedView: View
-
-    private val db by lazy {
-        RouteFinderDatabase.invoke(requireContext())
+    @Inject
+    lateinit var utils: Utils
+    init {
+        DaggerAppComponent.create().inject(this)
     }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -49,11 +50,11 @@ class RouteListFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        routeJsonResponse = Utils.getRouteData(requireContext())
+        routeJsonResponse = utils.getRouteData(requireContext())
         if(!Places.isInitialized())
             Places.initialize(requireContext(), resources.getString(R.string.google_maps_key))
         placesClient = Places.createClient(requireContext())
-        viewModel = ViewModelProvider(this, Utils.getViewModelFactory { RouteListViewModel(db.routeDao()) }).get(RouteListViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(RouteListViewModel::class.java)
         viewModel.apply {
             //TODO remove this
             processRouteResponse(routeJsonResponse)

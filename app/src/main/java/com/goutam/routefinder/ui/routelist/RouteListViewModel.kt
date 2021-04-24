@@ -6,17 +6,21 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.goutam.routefinder.di.daggercomponent.DaggerAppComponent
 import com.goutam.routefinder.model.ModelRouteData
-import com.goutam.routefinder.roomhelper.dao.RouteDao
 import com.goutam.routefinder.roomhelper.repository.Result
 import com.goutam.routefinder.roomhelper.repository.RouteRepository
 import com.goutam.routefinder.roomhelper.tables.TabRouteDetails
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class RouteListViewModel(
-    routeDao: RouteDao
-): ViewModel() {
-    private val routeRepo = RouteRepository(routeDao)
+class RouteListViewModel: ViewModel() {
+    @Inject
+    lateinit var routeRepo: RouteRepository
+
+    init {
+        DaggerAppComponent.create().inject(this)
+    }
 
     private val _sourceAddress = MutableLiveData<String?>()
     val sourceAddress: LiveData<String?>  = _sourceAddress
@@ -42,9 +46,9 @@ class RouteListViewModel(
 
     fun getAllRoutes(){
         //TODO Uncomment this
-        //if (validateSourceNDestination()){
+        if (validateSourceNDestination()){
             invokeAllRoute()
-        //}
+        }
     }
 
     private fun validateSourceNDestination(): Boolean{

@@ -1,13 +1,19 @@
 package com.goutam.routefinder.roomhelper.repository
 
+import com.goutam.routefinder.di.daggercomponent.DaggerAppComponent
 import com.goutam.routefinder.roomhelper.dao.RouteDao
 import com.goutam.routefinder.roomhelper.tables.TabRouteDetails
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
-class RouteRepository(
-    private val routeDao: RouteDao
-) {
+class RouteRepository{
+    @Inject
+    lateinit var routeDao: RouteDao
+
+    init {
+        DaggerAppComponent.create().inject(this)
+    }
 
     suspend fun insertRoute(route: TabRouteDetails): Result<Long> {
         return withContext(Dispatchers.IO){

@@ -1,6 +1,5 @@
 package com.goutam.routefinder.ui.routelist
 
-import android.content.Context
 import android.content.res.Resources
 import android.view.LayoutInflater
 import android.view.View
@@ -14,17 +13,22 @@ import com.goutam.routefinder.customview.CustomProgressBar
 import com.goutam.routefinder.customview.ThemeTextView
 import com.goutam.routefinder.customview.model.ProgressItem
 import com.goutam.routefinder.databinding.ItemRouteListBinding
+import com.goutam.routefinder.di.daggercomponent.DaggerAppComponent
 import com.goutam.routefinder.model.Route
 import com.goutam.routefinder.roomhelper.tables.TabRouteDetails
 import com.goutam.routefinder.utils.Utils
+import javax.inject.Inject
 
 class RouteListAdapter(
         private val routeList: MutableList<TabRouteDetails> = mutableListOf(),
         private val onItemClicked: (routeDetails: TabRouteDetails) -> Unit
 ): RecyclerView.Adapter<RouteListAdapter.RouteHolder>() {
-    lateinit var mContext: Context
+    @Inject
+    lateinit var utils: Utils
+    init {
+        DaggerAppComponent.create().inject(this)
+    }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RouteHolder {
-        mContext = parent.context
         val itemRouteListBinding = ItemRouteListBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return RouteHolder(itemRouteListBinding)
     }
@@ -47,7 +51,7 @@ class RouteListAdapter(
         fun bind(routeDetails: TabRouteDetails) {
             itemRouteListBinding.apply {
                 val res: Resources? = itemRouteListBinding.root.resources
-                tripDetails.travelTime.text = res?.getString(R.string.minute_duration, Utils.getTimeInMin(routeDetails.totalDuration).toInt().toString())
+                tripDetails.travelTime.text = res?.getString(R.string.minute_duration, utils.getTimeInMin(routeDetails.totalDuration).toInt().toString())
                 tripDetails.distance.text = res?.getString(R.string.kms_distance, String.format("%.2f", routeDetails.totalDistance))
                 tripDetails.estPrice.text = res?.getString(R.string.total_fare, routeDetails.totalFare.toString())
                 cardContainer.setOnClickListener { onItemClicked(routeDetails) }
@@ -57,12 +61,12 @@ class RouteListAdapter(
 
         private fun initProgressData(progress: CustomProgressBar, legIconHolder: LinearLayout, legDetailsHolder:LinearLayout, routes: List<Route>?, totalDuration: String?) {
             val progressItemList = mutableListOf<ProgressItem>()
-            val totalDurationInSec = Utils.getTimeInMin(totalDuration)
+            val totalDurationInSec = utils.getTimeInMin(totalDuration)
             legIconHolder.removeAllViews()
             legDetailsHolder.removeAllViews()
             legIconHolder.weightSum = 100.0f
             routes?.forEachIndexed {index, route ->
-                val routeDuration = Utils.getTimeInMin(route.duration)
+                val routeDuration = utils.getTimeInMin(route.duration)
                 val percentage = routeDuration / totalDurationInSec * 100
 
                 progressItemList.add(ProgressItem(getProgressColor(route.medium), percentage))
@@ -123,7 +127,7 @@ class RouteListAdapter(
             return when(route.medium){
                 BUS -> route.busRouteDetails?.routeNumber
                 WALK -> {
-                    val time = String.format("%.2f", Utils.getTimeInMin(route.duration))
+                    val time = String.format("%.2f", utils.getTimeInMin(route.duration))
                     txtLeg?.resources?.getString(R.string.minute_duration, time)
                 }
                 else -> txtLeg?.resources?.getString(R.string.purple_line)

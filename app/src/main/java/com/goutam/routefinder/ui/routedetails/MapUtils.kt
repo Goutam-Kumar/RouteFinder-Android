@@ -7,7 +7,6 @@ import androidx.core.graphics.drawable.toBitmap
 import com.goutam.routefinder.R
 
 object MapUtils {
-
     fun getBusBitmap(context: Context): Bitmap? {
         val bitmap =  AppCompatResources.getDrawable(context, R.drawable.ic_bus)?.toBitmap()
         return Bitmap.createScaledBitmap(bitmap!!, 70, 70, false)

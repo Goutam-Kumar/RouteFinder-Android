@@ -17,7 +17,6 @@ import com.google.gson.Gson
 import com.goutam.routefinder.R
 import com.goutam.routefinder.databinding.FragmentRouteDetailsBinding
 import com.goutam.routefinder.roomhelper.tables.TabRouteDetails
-import com.goutam.routefinder.utils.Utils
 
 class RouteDetailsFragment : Fragment(), OnMapReadyCallback {
     private lateinit var binding: FragmentRouteDetailsBinding
@@ -35,7 +34,7 @@ class RouteDetailsFragment : Fragment(), OnMapReadyCallback {
         super.onActivityCreated(savedInstanceState)
         val args = RouteDetailsFragmentArgs.fromBundle(requireArguments())
         routeDetails = args.routeDetails
-        viewModel = ViewModelProvider(this, Utils.getViewModelFactory { RouteDetailsViewModel() }).get(RouteDetailsViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(RouteDetailsViewModel::class.java)
         val mapFragment = childFragmentManager.findFragmentById(R.id.google_map) as SupportMapFragment
         mapFragment.getMapAsync(this)
     }
